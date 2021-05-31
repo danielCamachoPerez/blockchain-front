@@ -19,7 +19,8 @@ const Form = () => {
     const request = await fetch(url, myHeaders);
     const response = await request.json();
     if (response.message !== "welcome!") {
-      return console.log(response.message);
+      return alert(response.message)
+      //return console.log(response.message);
     } else {
       const token = response.token;
       const name = response.name;

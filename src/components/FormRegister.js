@@ -30,6 +30,9 @@ const FormRegister =()=>{
         }
         const request = await fetch(url,myHeaders)
         const response = await request.json()
+        if(response.message==='this mail exist!'){
+            return alert(response.message)
+        }
         const token = response.token
         const username=response.name
         const userid=response.id

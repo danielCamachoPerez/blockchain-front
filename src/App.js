@@ -6,6 +6,7 @@ import FormRegister from "./components/FormRegister";
 import Home from "./components/Home";
 import Transaction from "./components/Transaction";
 import Details from "./components/Details";
+import Import from "./components/Import";
 //import Error from "./components/404";
 
 const isAut = () => {
@@ -49,6 +50,7 @@ function App() {
         <MyRoute exact path='/details/:id' component={Details}/>
         <MyRoute exact path="/home" component={Home} />
         <MyRoute path='/transaction/:id' component={Transaction}/>
+        <MyRoute exact path='/import' component={Import}/>
         {/* <Route path="*">
           <Error />
         </Route> */}

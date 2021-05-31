@@ -37,7 +37,8 @@ const Home = () => {
 
     const getKey =()=>{
         if(myWallet.name===''){
-            return console.log('select wallet!')
+            return alert('select wallet!')
+            //return console.log('select wallet!')
         }
         const bitCoin =()=>{
             console.log('bitcoin')
@@ -154,20 +155,24 @@ const Home = () => {
                         {crypto.map(crypto=>(<option key={crypto.id} value={crypto.name}>{crypto.name}</option>))}
                     </select>
                 </div>
-                <div>
+                <div className='mr-t-1'>
                     <label>public key</label>
                     <input style={{width:'940px'}} name='public_key' type="text" defaultValue={publicKey} disabled required />
+                </div>
+                <div className='mr-t-1'>
                     <label>private key</label>
                     <input style={{width:'500px'}} name='private_key' type="text" defaultValue={privateKey} disabled required />
+                </div>
+                <div className="mr-t-1">
                     <button type='button' onClick={getKey}>generate keys</button>
                 </div>
-                <div>
+                <div className='mr-t-1'>
                     <input type="submit" value="create wallet" />
                 </div>
             </form>
-            {/* <div>
-                <Link to='/transaction'><h3>new transaction</h3></Link>
-            </div> */}
+            <div>
+                <Link to='/import'><h3>Import Wallet</h3></Link>
+            </div>
         </div>
     );
 }
