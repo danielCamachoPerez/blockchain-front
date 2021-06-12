@@ -1,26 +1,15 @@
 import { useEffect, useState } from "react"
 import {myKey, bitcoinWallet,ethereumWallet} from '../services/keygenerator'
 import {Link} from 'react-router-dom'
+import { Container, Content, Formulary, Img } from './Styles'
+import { crypto } from '../services/AllWallets'
+import {BiWallet} from 'react-icons/bi'
+import {VscKey} from 'react-icons/vsc'
+import {GiBank} from 'react-icons/gi'
+import Swal from "sweetalert2"
+//import SideBar from './SideBar'
 
 const Home = () => {
-    const crypto =[
-        {
-            id:1,
-            name:'Bitcoin',
-            value:'bitcoin',
-        },
-        {
-            id:2,
-            name:'Ethereum',
-            value:'ethereum',
-        },
-        {
-            id:3,
-            name:'Pejecoin',
-            value:'pejecoin',
-        }
-    ]
-
     const [publicKey,setpublicKey]=useState('')
     const [privateKey,setPrivateKey]=useState('')
     const [wallet,setWallet]=useState([])
@@ -36,8 +25,12 @@ const Home = () => {
     },[])
 
     const getKey =()=>{
-        if(myWallet.name===''){
-            return alert('select wallet!')
+        if(myWallet.name==='' || wallet.name==='error'){
+            return Swal.fire(
+                'Select a Wallet!',
+                '',
+                'error'
+              )
             //return console.log('select wallet!')
         }
         const bitCoin =()=>{
@@ -70,10 +63,14 @@ const Home = () => {
             case 'Ethereum':eThereum()
                 break;
 
-            case 'Pejecoin':homeCoin()
+            case 'Homecoin':homeCoin()
                 break;
             
-            default:console.log('select a wallet!')
+            default:Swal.fire(
+                'Select a Wallet!',
+                '',
+                'error'
+              )
                 break;
         }
     }
@@ -99,7 +96,11 @@ const Home = () => {
             body: JSON.stringify(myWallet),
           }
         if(myWallet.name===''||myWallet.name==='error'||myWallet.public_key===''||myWallet.private_key===''||myWallet.user===''){
-            return console.log('error')
+            return Swal.fire(
+                'Select a Wallet!',
+                '',
+                'error'
+              )
         }
         const request = await fetch(url,myHeaders)
         const response =await request.json()
@@ -130,12 +131,17 @@ const Home = () => {
         setWallet(response)
     }
     return (
-        <div className='container'>
-            <h1>Welcome home, {sessionStorage.getItem('name')}</h1>
-            <h3>Your Wallets: </h3>
-            <ul>
+        <Container direction='column'>
+            <figure>
+                <Img src="walletsing.png" alt="wallet" />
+            </figure>
+            <article>
+                <h1 style={{color:'#fff'}}>Welcome <span>{sessionStorage.getItem('name')}</span></h1>
+            </article>
+            <Content top='40px' direction='column'>
+                <h3 style={{color:'#fff'}}>My Wallets</h3>
                 {wallet.map(wallet=>(
-                    <li key={wallet._id}>
+                    <aside className='wallet' key={wallet._id}>
                         {wallet.name} 
                         <span style={{marginLeft:'15px'}}>
                             <Link to={`/transaction/${wallet._id}`}>new transaction</Link>
@@ -143,37 +149,60 @@ const Home = () => {
                         <span style={{marginLeft:'15px'}}>
                             <Link to={`/details/${wallet._id}`}>show details</Link>
                         </span>
-                    </li>
+                    </aside>
                 ))}
-            </ul>
-
-            <h2>Add new Wallet:</h2>
-            <form onSubmit={submitCrypto}>
-                <div>
+            </Content>
+            <h2 style={{color:'#fff'}}>Add new Wallet:</h2>
+            <Formulary 
+                onSubmit={submitCrypto}
+                direction='column'
+                border='solid 0.5px #000'
+                // eslint-disable-next-line
+                style={{minWidth:'750px'},{maxWidth:'1080px'}}
+            >
+                <h3>Select name wallet</h3>
+                <div className='m-b m-t-1'>
+                    <GiBank color='#000' size={20} style={{marginRight:'8px'}}/>
                     <select name='name' onChange={handleChange}>
                         <option value="error">--Select crypto--</option>
                         {crypto.map(crypto=>(<option key={crypto.id} value={crypto.name}>{crypto.name}</option>))}
                     </select>
                 </div>
-                <div className='mr-t-1'>
-                    <label>public key</label>
-                    <input style={{width:'940px'}} name='public_key' type="text" defaultValue={publicKey} disabled required />
-                </div>
-                <div className='mr-t-1'>
-                    <label>private key</label>
-                    <input style={{width:'500px'}} name='private_key' type="text" defaultValue={privateKey} disabled required />
-                </div>
-                <div className="mr-t-1">
-                    <button type='button' onClick={getKey}>generate keys</button>
-                </div>
-                <div className='mr-t-1'>
-                    <input type="submit" value="create wallet" />
-                </div>
-            </form>
+                <label><VscKey/> public key</label>
+                <input
+                    className='m-b m-t-1 input-1'  
+                    name='public_key' 
+                    type="text" 
+                    defaultValue={publicKey} 
+                    disabled required 
+                />
+                <label><VscKey/> private key</label>
+                <input
+                    className='m-b m-t-1 input-1' 
+                    name='private_key' 
+                    type="text" 
+                    defaultValue={privateKey} 
+                    disabled required 
+                />
+                <button 
+                    type='button' 
+                    onClick={getKey}
+                    className='m-b m-t-1 input-1 btn btn-secondary'
+                >
+                    generate keys
+                </button>
+                <input 
+                    type="submit" 
+                    value="create wallet" 
+                    className='m-b m-t-1 input-1 btn btn-secondary'
+                />
+            </Formulary>
             <div>
-                <Link to='/import'><h3>Import Wallet</h3></Link>
+                <Link style={{textDecoration:'none'}} to='/import'><h3 style={{color:'#fff'}}>
+                    <BiWallet/> Import Wallet</h3>
+                </Link>
             </div>
-        </div>
+        </Container>
     );
 }
 

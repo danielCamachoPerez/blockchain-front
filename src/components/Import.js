@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import {Container, Formulary} from './Styles'
 
 const Blocks = () => {
     const [importWallet,setimportWallet]=useState({
@@ -65,31 +66,49 @@ const Blocks = () => {
     }
 
     return (
-        <div className='container'>
-            <h2>Add new Wallet:</h2>
-            <form onSubmit={submitCrypto}>
-                <div>
-                    <select name='name' onChange={handleChange}>
-                        <option value="error">--Select crypto--</option>
-                        {crypto.map(crypto=>(<option key={crypto.id} value={crypto.name}>{crypto.name}</option>))}
-                    </select>
-                </div>
-                <div className="mr-t-1">
-                    <label>public key</label>
-                    <input style={{width:'940px'}} name='public_key' type="text" onChange={handleChange} required />
-                </div>
-                <div className="mr-t-1">
-                    <label>private key</label>
-                    <input style={{width:'500px'}} name='private_key' type="text" onChange={handleChange} required />
-                </div>
-                <div className="mr-t-1">
-                    <input type="submit" value="import wallet" />
-                </div>
-            </form>
-            <div className="mr-t-1">
-                <button style={{cursor:'pointer'}} type='button' onClick={()=>handleCancel()}>cancel</button>
-            </div>
-        </div>
+        <Container direction='column'>
+            <h2 style={{color:'#fff'}}>Add new Wallet:</h2>
+            <Formulary  
+                onSubmit={submitCrypto}
+                direction='column' 
+                border='solid 0.5px #000'
+                // eslint-disable-next-line
+                style={{minWidth:'750px'},{maxWidth:'1080px'}}
+            >
+                <select style={{width:'20%'}} name='name' onChange={handleChange}>
+                    <option value="error">--Select crypto--</option>
+                    {crypto.map(crypto=>(<option key={crypto.id} value={crypto.name}>{crypto.name}</option>))}
+                </select>
+                <label>public key</label>
+                <input 
+                    name='public_key' 
+                    type="text" 
+                    onChange={handleChange} required
+                    className='m-b m-t-1 input-1' 
+                />
+                <label>public key</label>
+                <input 
+                    name='public_key' 
+                    type="text" 
+                    onChange={handleChange} required
+                    className='m-b m-t-1 input-1'  
+                />
+                <input
+                    className='btn btn-secondary' 
+                    type="submit" 
+                    value="import wallet" 
+                />
+                <button 
+                    style={{cursor:'pointer'}} 
+                    type='button' 
+                    className='btn btn-secondary m-t-1'
+                    onClick={()=>handleCancel()}
+                >
+                    cancel
+                </button>
+                
+            </Formulary>
+        </Container>
     );
 }
 

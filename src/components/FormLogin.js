@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Container, Formulary } from './Styles'
 
 const Form = () => {
   const [user, setUser] = useState({});
@@ -32,34 +34,50 @@ const Form = () => {
     }
   };
   return (
-    <div className='container-2 flex flex-direction-col'>
-      <div className="m-t-1">
-        <h1>LogIn</h1>
+    <Container direction='column'>
+      <div><h1 style={{ color: "#fff" }}>LogIn</h1></div>
+      <Formulary 
+        border='solid 1px #EBEDEF' 
+        width='25%' 
+        direction='column'
+        onSubmit={handleSubmit}
+      >
+        <label>email address</label>
+        <input
+          className='m-b m-t-1 input-1 input-text'
+          type="email"
+          name="mail"
+          placeholder="email"
+          onChange={handleChange}
+          required
+        />
+        <label>Password</label>
+        <input
+          className='m-b m-t-1 input-1 input-text'
+          type="password"
+          name="password"
+          placeholder="password"
+          onChange={handleChange}
+          required
+        />
+        
+        <input 
+          className='btn btn-primary' 
+          type="submit" 
+          value="Login" 
+        />
+
+      </Formulary>
+      
+      <div>
+        <h4 style={{ color: "#fff" }}>
+          New on CryptoWallet?
+          <Link style={{ marginLeft: "8px" }} to="/register">
+            create an account
+          </Link>
+        </h4>
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className="mr-t-1">
-          <input
-            type="email"
-            name="mail"
-            placeholder="email"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mr-t-1">
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mr-t-1">
-          <input type="submit" value="Login" />
-        </div>
-      </form>
-    </div>
+    </Container>
   );
 };
 

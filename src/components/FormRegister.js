@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
+import { Container, Formulary } from './Styles'
 
 const FormRegister =()=>{
     const [user,setUser]=useState({
@@ -48,28 +50,55 @@ const FormRegister =()=>{
     }
 
     return (
-        <div className='container-2 flex flex-direction-col'>
-            <div className="m-t-1">
-                <h1>SingUp</h1>
-            </div>
-            <form onSubmit={submitNewUser}>
-                <div className="mr-t-1">
-                    <label>your name</label><br />
-                    <input type="text" name="name" placeholder="name" onChange={handleChange} required />
-                </div>
-                <div className="mr-t-1">
-                    <label>your email</label><br />
-                    <input type="email" name="mail" placeholder="email" onChange={handleChange} required />
-                </div>
-                <div className="mr-t-1">
-                    <label>your password</label><br />
-                    <input type="password" name="password" placeholder="password" onChange={handleChange} required />
-                </div>
-                <div className="mr-t-1">
-                    <input type="submit" value="register" />
-                </div>
-            </form>
-        </div>
+        <Container direction='column'>
+            <div><h1 style={{ color: "#fff" }}>SingUp</h1></div>
+            <Formulary 
+                border='solid 1px #EBEDEF' 
+                width='25%' 
+                direction='column'
+                onSubmit={submitNewUser}
+            >
+                <label className="label">Name</label>
+                <input 
+                    className='m-b m-t-1 input-1 input-text'
+                    type="text" 
+                    name="name" 
+                    placeholder="name" 
+                    onChange={handleChange} 
+                    required 
+                />
+                <label>your email</label>
+                <input 
+                    className='m-b m-t-1 input-1 input-text'
+                    type="email" 
+                    name="mail" 
+                    placeholder="email" 
+                    onChange={handleChange} 
+                    required 
+                />
+                <label>your password</label>
+                <input 
+                    className='m-b m-t-1 input-1 input-text'
+                    type="password" 
+                    name="password" 
+                    placeholder="password" 
+                    onChange={handleChange} 
+                    required 
+                />
+                <input 
+                    className='btn btn-primary'
+                    type="submit" 
+                    value="register" 
+                />
+            </Formulary>
+                
+            <h4 style={{ color: "#fff" }}>
+                You have account?
+                <Link style={{ marginLeft: "8px" }} to="/login">
+                    login
+                </Link>
+            </h4>
+        </Container>
     )
 }
 
