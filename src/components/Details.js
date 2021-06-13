@@ -77,7 +77,7 @@ const Details = () => {
               'Content-Type': 'application/json',
               'Accept': 'application/json',
               mode:'cors',
-             },
+            },
         }
         const request = await fetch(url,myHeaders)
         const response = await request.json()

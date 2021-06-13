@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import { Container, Formulary } from "./Styles";
 
 const Transaction = () => {
@@ -70,8 +71,19 @@ const Transaction = () => {
     };
     const request = await fetch(url, myHeaders);
     const response = await request.json();
+    const messageresponse = response.message
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: messageresponse,
+      showConfirmButton: false,
+      timer: 2500
+    })
     console.log(response.message);
     console.log(response.data);
+    setTimeout(() => {
+      window.location= '/home'
+    }, 1500);
   };
 
   return (

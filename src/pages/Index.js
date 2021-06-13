@@ -13,12 +13,30 @@ const Index = () => {
                 <h1 style={{ color: "#fff" }}>Create a CryptoWallet!</h1>
             </article>
             <h4 style={{ color: "#fff" }}>
-                you have an acount? <Link to='/login'>SingUp</Link>
-                <span style={{marginLeft:'5px'}}>or <Link to='/register'>Create one</Link></span>
+                you have an acount?
+                <span style={{marginLeft:'8px'}}>
+                    <Link style={{color: "#61dafb"}} to='/login'>SingUp</Link>
+                </span>
+                <span style={{marginLeft:'8px'}}>
+                    or 
+                    <span style={{marginLeft:'8px'}}>
+                        <Link style={{color: "#61dafb"}} to='/register'>Create one</Link>
+                    </span>
+                </span>
             </h4>
             <div style={{color:'#fff'}}>
                 <h3 className='is-centered'>you want to know price in your country?</h3>
-                <h2 className='is-centered'>Go<a style={{marginLeft:'5px'}} target="_blank" rel='noopener noreferrer' href="https://react-crypto-wallet-api.netlify.app/">Here</a></h2>
+                <h2 className='is-centered'>
+                    Go
+                    <span style={{marginLeft:'8px'}} >
+                        <a 
+                            style={{ color: "#61dafb" }} 
+                            target="_blank" rel='noopener noreferrer' 
+                            href="https://react-crypto-wallet-api.netlify.app/">
+                            Here
+                        </a>
+                    </span>
+                </h2>
             </div>
         </Container>
     );

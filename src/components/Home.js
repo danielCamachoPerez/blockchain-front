@@ -104,8 +104,18 @@ const Home = () => {
         }
         const request = await fetch(url,myHeaders)
         const response =await request.json()
+        const messageresponse = response.message
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: messageresponse,
+            showConfirmButton: false,
+            timer: 2500
+          })
         console.log(response.message)
-        window.location.href='/home'
+        setTimeout(()=>{
+            window.location.href='/home'
+        },2500)
     }
 
     const submitCrypto=(e)=>{

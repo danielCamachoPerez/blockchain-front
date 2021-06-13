@@ -1,5 +1,7 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
 import {Container, Formulary} from './Styles'
+import {crypto} from '../services/AllWallets'
 
 const Blocks = () => {
     const [importWallet,setimportWallet]=useState({
@@ -8,23 +10,6 @@ const Blocks = () => {
         private_key:'',
         user:sessionStorage.getItem('idUser'),
     })
-    const crypto =[
-        {
-            id:1,
-            name:'Bitcoin',
-            value:'bitcoin',
-        },
-        {
-            id:2,
-            name:'Ethereum',
-            value:'ethereum',
-        },
-        {
-            id:3,
-            name:'Homecoin',
-            value:'homecoin',
-        }
-    ]
 
     const handleChange=(e)=>{
         setimportWallet({
@@ -51,8 +36,18 @@ const Blocks = () => {
         }
         const request = await fetch(url,myHeaders)
         const response =await request.json()
+        const messageresponse = response.message
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: messageresponse,
+            showConfirmButton: false,
+            timer: 2500
+          })
         console.log(response.message)
-        window.location.href='/home'
+        setTimeout(()=>{
+            window.location.href='/home'
+        },2500)
     }
 
     const submitCrypto=(e)=>{
@@ -88,7 +83,7 @@ const Blocks = () => {
                 />
                 <label>public key</label>
                 <input 
-                    name='public_key' 
+                    name='private_key' 
                     type="text" 
                     onChange={handleChange} required
                     className='m-b m-t-1 input-1'  

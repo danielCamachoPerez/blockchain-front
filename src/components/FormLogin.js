@@ -72,9 +72,11 @@ const Form = () => {
       <div>
         <h4 style={{ color: "#fff" }}>
           New on CryptoWallet?
-          <Link style={{ marginLeft: "8px" }} to="/register">
-            create an account
-          </Link>
+          <span style={{marginLeft:'8px'}}>
+            <Link style={{color:'#61dafb'}} to="/register">
+              create an account
+            </Link>
+          </span>
         </h4>
       </div>
     </Container>

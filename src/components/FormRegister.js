@@ -94,9 +94,11 @@ const FormRegister =()=>{
                 
             <h4 style={{ color: "#fff" }}>
                 You have account?
-                <Link style={{ marginLeft: "8px" }} to="/login">
-                    login
-                </Link>
+                <span style={{marginLeft:'8px'}}>
+                    <Link style={{ color: "#61dafb" }} to="/login">
+                        login
+                    </Link>
+                </span>
             </h4>
         </Container>
     )
